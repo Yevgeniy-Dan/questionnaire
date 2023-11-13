@@ -4,7 +4,7 @@
   rowHeight="250px"
   class="mat-grid-list"
 >
-  <mat-grid-tile *ngFor="let question of questions">
+  <mat-grid-tile *ngFor="let question of questions | sortedQuestions">
     <app-question [question]="question"></app-question>
   </mat-grid-tile>
 </mat-grid-list>

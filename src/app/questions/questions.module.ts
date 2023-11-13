@@ -9,12 +9,14 @@ import { QuestionListComponent } from './question-list/question-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { QuestionComponent } from './question/question.component';
+import { SortedQuestionsPipe } from './shared/sorted-questions.pipe';
 @NgModule({
   declarations: [
     QuestionsComponent,
     QuestionManagmentComponent,
     QuestionListComponent,
     QuestionComponent,
+    SortedQuestionsPipe,
   ],
   imports: [
     CommonModule,
