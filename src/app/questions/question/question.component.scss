@@ -1,0 +1,35 @@
+.card {
+  cursor: pointer;
+  width: 300px;
+  height: 150px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-card-header {
+  background-color: #4caf50;
+  color: #f0f0f0;
+  padding: 16px;
+}
+
+.mat-card-title {
+  font-size: 1.2rem;
+}
+
+.mat-card-footer {
+  padding: 16px;
+  margin-top: auto;
+}
+
+.mat-card-footer div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-card-footer p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #555;
+}

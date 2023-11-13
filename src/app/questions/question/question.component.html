@@ -1,0 +1,11 @@
+<mat-card class="card">
+  <mat-card-header class="mat-card-header">
+    <mat-card-title class="mat-card-title">{{ question.text }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-footer class="mat-card-footer">
+    <div>
+      <p>{{ question.type }}</p>
+      <p>{{ question.date | date : "yyyy-MM-dd" }}</p>
+    </div>
+  </mat-card-footer>
+</mat-card>
