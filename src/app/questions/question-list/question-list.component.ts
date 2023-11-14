@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Question } from '../shared/question.model';
-import { questions } from '../shared/questions-data';
+import { Component, Input } from '@angular/core';
+
+import { IQuestion } from '../shared/question.model';
 
 @Component({
   selector: 'app-question-list',
@@ -8,8 +8,5 @@ import { questions } from '../shared/questions-data';
   styleUrls: ['./question-list.component.scss'],
 })
 export class QuestionListComponent {
-  questions: Question[];
-  constructor() {
-    this.questions = questions;
-  }
+  @Input() questions!: IQuestion[];
 }

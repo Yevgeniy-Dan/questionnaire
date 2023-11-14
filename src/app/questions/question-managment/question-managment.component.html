@@ -1,1 +1,10 @@
-<app-question-list></app-question-list>
+<div class="button-container">
+  <button mat-raised-button color="primary" routerLink="./create">
+    + Create
+  </button>
+</div>
+<ng-container *ngIf="questions$ | async as questions; else showLoading">
+  <app-question-list [questions]="questions"></app-question-list>
+</ng-container>
+
+<ng-template #showLoading> Loading... </ng-template>

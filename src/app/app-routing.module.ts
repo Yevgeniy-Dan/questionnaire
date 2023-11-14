@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppRoute } from './app-routing.enum';
+import { AppQuestionRoute } from './app-routing.enum';
 
 const routes: Routes = [
   {
-    path: AppRoute.Questions,
+    path: AppQuestionRoute.All,
     loadChildren: () =>
       import('./questions/questions.module').then((m) => m.QuestionsModule),
   },
   {
     path: '**',
-    redirectTo: AppRoute.Questions,
+    redirectTo: AppQuestionRoute.All,
   },
 ];
 

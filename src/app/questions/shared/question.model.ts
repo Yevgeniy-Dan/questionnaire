@@ -1,4 +1,5 @@
-export interface Question {
+export interface IQuestion {
+  id: string;
   text: string;
   type: 'single' | 'multiple' | 'open';
   date: Date;

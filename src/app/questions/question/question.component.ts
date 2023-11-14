@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '../shared/question.model';
-import { questions } from '../shared/questions-data';
+import { IQuestion } from '../shared/question.model';
 
 @Component({
   selector: 'app-question',
@@ -8,5 +7,9 @@ import { questions } from '../shared/questions-data';
   styleUrls: ['./question.component.scss'],
 })
 export class QuestionComponent {
-  @Input() question!: Question;
+  @Input() question!: IQuestion;
+
+  editCard(): void {}
+
+  removeCard(id: string): void {}
 }
