@@ -2,7 +2,7 @@ import { ActionReducerMap } from '@ngrx/store';
 
 import * as questionStore from './questions';
 
-const questionStateKey = 'questions';
+export const questionStateKey = 'questions';
 
 export interface IAppState {
   [questionStateKey]: questionStore.IQuestionState;

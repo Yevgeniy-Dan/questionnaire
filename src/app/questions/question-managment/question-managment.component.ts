@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 
 import { IAppState } from 'src/app/state/app.state';
-import { IQuestion } from '../shared/question.model';
+import { IQuestion } from '../shared/questions/question.model';
 import { loadQuestions, selectQuestionsData } from 'src/app/state/questions';
 
 @Component({
@@ -17,7 +17,7 @@ export class QuestionManagmentComponent implements OnInit {
   constructor(private store: Store<IAppState>) {
     this.questions$ = this.store.select(selectQuestionsData).pipe(
       map((questions) => {
-        return questions.data;
+        return questions;
       })
     );
   }

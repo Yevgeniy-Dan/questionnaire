@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { QuestionsModule } from './questions/questions.module';
 import { appReducers } from './state/app.state';
 import { QuestionEffects } from './state/questions/questions.effects';
+import * as fromLocalStorage from './state/local-storage';
+import { UnsubscriberService } from './services/unsubscriber.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,13 +22,15 @@ import { QuestionEffects } from './state/questions/questions.effects';
     AppRoutingModule,
     QuestionsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(appReducers, {
+      metaReducers: [fromLocalStorage.localStorageSyncReducer],
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
     EffectsModule.forRoot([QuestionEffects]),
   ],
-  providers: [],
+  providers: [UnsubscriberService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

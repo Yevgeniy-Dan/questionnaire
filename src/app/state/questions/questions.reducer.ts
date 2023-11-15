@@ -9,12 +9,11 @@ const questionsReducer = createReducer(
       ...state,
       questions: {
         ...state.questions,
-        loading: true,
       },
     };
   }),
-  on(questionActions.loadQuestionsComplete, (state, { data }) => {
-    return { ...state, questions: { data, loading: false } };
+  on(questionActions.loadQuestionsComplete, (state, { questions }) => {
+    return { ...state, questions };
   })
 );
 

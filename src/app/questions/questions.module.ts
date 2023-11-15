@@ -6,35 +6,48 @@ import { QuestionsComponent } from './questions.component';
 import { QuestionManagmentComponent } from './question-managment/question-managment.component';
 import { QuestionListComponent } from './question-list/question-list.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { QuestionComponent } from './question/question.component';
-import { SortedQuestionsPipe } from './shared/sorted-questions.pipe';
 import { CreationComponent } from './creation/creation.component';
 import { EditComponent } from './edit/edit.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     QuestionsComponent,
     QuestionManagmentComponent,
     QuestionListComponent,
     QuestionComponent,
-    SortedQuestionsPipe,
     CreationComponent,
     EditComponent,
   ],
+  exports: [QuestionsComponent],
   imports: [
     CommonModule,
     HttpClientModule,
     QuestionsRoutingModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatChipsModule,
+    SharedModule,
   ],
-  exports: [QuestionsComponent],
 })
 export class QuestionsModule {}
