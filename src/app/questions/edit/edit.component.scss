@@ -1,6 +1,8 @@
 .card-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
 }
 
 .edit-container {
@@ -15,8 +17,33 @@
   flex-direction: column;
 }
 
+.card-container,
+.form-container {
+  margin: 40px;
+}
+
+.form-container mat-form-field {
+  margin-bottom: 20px;
+}
+
+.hint {
+  color: #555;
+}
+
+.page-title {
+  margin-bottom: 10px;
+}
+.save-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  width: 25%;
+}
+
 .title-input {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {

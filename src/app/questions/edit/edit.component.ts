@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import {
   FormArray,
   FormBuilder,
@@ -11,12 +11,19 @@ import {
 } from '@angular/forms';
 
 import { IAppState } from 'src/app/state/app.state';
-import { selectQuestionById } from 'src/app/state/questions';
+import { editQuestion, selectQuestionById } from 'src/app/state/questions';
 import { IQuestion } from '../shared/questions/question.model';
 import { UnsubscriberService } from 'src/app/services/unsubscriber.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
+import { answerOptionsValidator } from '../shared/questions/question.validator';
+
+interface EditFormValues {
+  title: string;
+  questionType: 'single' | 'multiple' | 'open';
+  answerOptions: string[];
+}
 
 /**
  * Component for Editing Questions
@@ -36,13 +43,20 @@ export class EditComponent implements OnInit {
     selectQuestionById(this.route.snapshot.queryParams['id'])
   );
 
+  realTimeEditQuestion: IQuestion = {} as IQuestion;
+
   questionTypes: string[] = ['single', 'multiple', 'open'];
 
-  editForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required]],
-    questionType: ['', [Validators.required]],
-    answerOptions: this.fb.array([]),
-  });
+  editForm: FormGroup = this.fb.group(
+    {
+      title: ['', [Validators.required]],
+      questionType: ['', [Validators.required]],
+      answerOptions: this.fb.array([]),
+    },
+    {
+      validators: answerOptionsValidator,
+    }
+  );
 
   get answerOptions(): FormArray {
     return this.editForm.get('answerOptions') as FormArray;
@@ -56,19 +70,41 @@ export class EditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.editQuestion$
-      .pipe(this.unsubscriber.takeUntilDestroy)
-      .subscribe((question) => {
-        // Populate form with question data
-        this.editForm.patchValue({
-          title: question?.text,
-          questionType: question?.type,
-        });
+    this.editQuestion$.pipe(take(1)).subscribe((question) => {
+      // Populate form with question data
+      this.editForm.patchValue({
+        title: question?.text,
+        questionType: question?.type,
+      });
 
-        // Add answer options to the form
+      // Add answer options to the form
+      if (question?.answer_options) {
         question?.answer_options.forEach((option) => {
           this.answerOptions.push(this.fb.control(option));
         });
+      }
+
+      if (question) {
+        this.realTimeEditQuestion = { ...question };
+      }
+
+      this.onChanges();
+    });
+  }
+
+  /**
+   * Listens to changes in the edit form values and updates the real-time edited question
+   */
+  onChanges(): void {
+    this.editForm.valueChanges
+      .pipe(this.unsubscriber.takeUntilDestroy)
+      .subscribe((formValues: EditFormValues) => {
+        this.realTimeEditQuestion = {
+          ...this.realTimeEditQuestion,
+          text: formValues.title,
+          type: formValues.questionType,
+          answer_options: formValues.answerOptions,
+        };
       });
   }
 
@@ -110,5 +146,11 @@ export class EditComponent implements OnInit {
 
     const optionControl = this.answerOptions.at(id) as FormControl;
     optionControl.setValue(value);
+  }
+
+  saveChanges(): void {
+    this.store.dispatch(
+      editQuestion({ editQuestion: this.realTimeEditQuestion })
+    );
   }
 }

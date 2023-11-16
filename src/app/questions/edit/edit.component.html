@@ -1,67 +1,86 @@
-<div>
-  <div>
-    <h1>Edit card</h1>
-  </div>
-  <div *ngIf="editQuestion$ | async as question" class="edit-container">
-    <ng-container>
-      <form
-        [formGroup]="editForm"
-        class="form-container"
-        (keydown.enter)="$event.preventDefault()"
-      >
-        <mat-form-field hideRequiredMarker class="title-input">
-          <!-- <mat-label>Title</mat-label> -->
-          <input
-            matInput
-            formControlName="title"
-            [value]="question.text"
-            placeholder="Title"
-          />
-        </mat-form-field>
+<div *ngIf="editQuestion$ | async as question" class="edit-container">
+  <ng-container>
+    <form
+      [formGroup]="editForm"
+      class="form-container"
+      (keydown.enter)="$event.preventDefault()"
+      (ngSubmit)="saveChanges()"
+    >
+      <h1 class="page-title">Edit card</h1>
 
-        <mat-form-field hideRequiredMarker>
-          <mat-label>Question Type</mat-label>
-          <mat-select formControlName="questionType">
-            <mat-option *ngFor="let type of questionTypes" [value]="type">{{
-              type
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field
-          formArrayName="answerOptions"
-          *ngIf="
-            editForm.get('questionType')?.value === 'single' ||
-            editForm.get('questionType')?.value === 'multiple'
-          "
-          hideRequiredMarker
+      <mat-form-field hideRequiredMarker class="title-input">
+        <!-- <mat-label>Title</mat-label> -->
+        <input
+          matInput
+          formControlName="title"
+          [value]="question.text"
+          placeholder="Title"
+        />
+        <mat-error *ngIf="editForm.get('title')?.hasError('required')"
+          >The title is required</mat-error
         >
-          <mat-label>Answer Options</mat-label>
-          <mat-chip-grid #chipGrid>
-            <mat-chip-row
-              *ngFor="let option of answerOptions.controls; let i = index"
-              (removed)="remove(i)"
-              [editable]="true"
-              (edited)="edit(i, $event)"
-            >
-              {{ option.value }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-            <input
-              placeholder="New option..."
-              [matChipInputFor]="chipGrid"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="add($event)"
-            />
-          </mat-chip-grid>
-        </mat-form-field>
-      </form>
-    </ng-container>
-    <ng-container class="card-container">
-      <app-question [question]="question"></app-question>
-    </ng-container>
-  </div>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <mat-label>Question Type</mat-label>
+        <mat-select formControlName="questionType">
+          <mat-option *ngFor="let type of questionTypes" [value]="type">{{
+            type
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        formArrayName="answerOptions"
+        *ngIf="
+          editForm.get('questionType')?.value === 'single' ||
+          editForm.get('questionType')?.value === 'multiple'
+        "
+        hideRequiredMarker
+      >
+        <mat-label>Answer Options</mat-label>
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row
+            *ngFor="let option of answerOptions.controls; let i = index"
+            (removed)="remove(i)"
+            [editable]="true"
+            (edited)="edit(i, $event)"
+          >
+            {{ option.value }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            placeholder="New option..."
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-grid>
+        <mat-hint align="start" class="hint">At least two options</mat-hint>
+      </mat-form-field>
+      <div class="save-button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          class="save-btn"
+          type="submit"
+          [disabled]="!editForm.valid"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </ng-container>
+  <ng-container>
+    <app-question
+      [question]="realTimeEditQuestion"
+      class="card-container"
+      [width]="'80%'"
+      [height]="'270px'"
+      [mode]="'edit'"
+    ></app-question>
+  </ng-container>
 </div>

@@ -4,14 +4,14 @@ import { Observable, map } from 'rxjs';
 
 import { IAppState } from 'src/app/state/app.state';
 import { IQuestion } from '../shared/questions/question.model';
-import { loadQuestions, selectQuestionsData } from 'src/app/state/questions';
+import { selectQuestionsData } from 'src/app/state/questions';
 
 @Component({
   selector: 'app-question-managment',
   templateUrl: './question-managment.component.html',
   styleUrls: ['./question-managment.component.scss'],
 })
-export class QuestionManagmentComponent implements OnInit {
+export class QuestionManagmentComponent {
   questions$: Observable<IQuestion[]>;
 
   constructor(private store: Store<IAppState>) {
@@ -20,8 +20,5 @@ export class QuestionManagmentComponent implements OnInit {
         return questions;
       })
     );
-  }
-  ngOnInit(): void {
-    this.store.dispatch(loadQuestions());
   }
 }

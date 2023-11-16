@@ -1,24 +1,26 @@
-<mat-card class="card">
-  <mat-card-header class="mat-card-header">
-    <mat-card-title class="mat-card-title">{{ question.text }}</mat-card-title>
+<mat-card class="card" [style.width]="width" [style.height]="height">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">{{ question.text }}</mat-card-title>
   </mat-card-header>
-  <mat-card-actions class="mat-card-actions">
-    <button
-      mat-mini-fab
-      color="primary"
-      routerLink="./edit"
-      [queryParams]="{ id: question.id }"
-    >
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-mini-fab color="warn" (click)="removeCard(question.id)">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card-actions>
-  <mat-card-footer class="mat-card-footer">
+  <mat-card-content class="card-content">
     <div>
       <p>{{ question.type }}</p>
       <p>{{ question.date | date : "yyyy-MM-dd" }}</p>
     </div>
+  </mat-card-content>
+  <mat-card-footer class="card-footer" *ngIf="mode === 'list'">
+    <mat-card-actions class="card-actions">
+      <button
+        mat-mini-fab
+        color="primary"
+        routerLink="./edit"
+        [queryParams]="{ id: question.id }"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" (click)="removeCard(question.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
   </mat-card-footer>
 </mat-card>
