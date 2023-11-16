@@ -21,6 +21,16 @@ const questionsReducer = createReducer(
       ...state,
       questions: updatedQuestions,
     };
+  }),
+  on(questionActions.removeQuestion, (state, { id }) => {
+    const updatedQuestions = state.questions.filter(
+      (question) => question.id !== id
+    );
+
+    return {
+      ...state,
+      questions: updatedQuestions,
+    };
   })
 );
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import {
@@ -73,6 +73,7 @@ export class CreateEditComponent implements OnInit {
   constructor(
     private store: Store<IAppState>,
     private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
     private readonly unsubscriber: UnsubscriberService
   ) {}
@@ -204,5 +205,9 @@ export class CreateEditComponent implements OnInit {
         })
       );
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['..']);
   }
 }

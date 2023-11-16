@@ -10,3 +10,8 @@ export const createQuestion = createAction(
   '[Create Question]',
   props<{ question: IQuestion }>()
 );
+
+export const removeQuestion = createAction(
+  '[Remove Question]',
+  props<{ id: string }>()
+);

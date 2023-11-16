@@ -1,5 +1,6 @@
-<div *ngIf="realTimeEditQuestion" class="edit-container">
-  <ng-container>
+<div class="main-create-edit-container">
+  <button mat-raised-button (click)="goBack()" class="back-button">Back</button>
+  <div *ngIf="realTimeEditQuestion" class="create-edit-container">
     <form
       [formGroup]="createEditForm"
       class="form-container"
@@ -21,14 +22,14 @@
         >
       </mat-form-field>
 
-      <mat-form-field hideRequiredMarker>
+      <div class="radio-button-group">
         <mat-label>Question Type</mat-label>
-        <mat-select formControlName="questionType">
-          <mat-option *ngFor="let type of questionTypes" [value]="type">{{
+        <mat-radio-group formControlName="questionType">
+          <mat-radio-button *ngFor="let type of questionTypes" [value]="type">{{
             type
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+          }}</mat-radio-button>
+        </mat-radio-group>
+      </div>
 
       <mat-form-field
         formArrayName="answerOptions"
@@ -73,8 +74,7 @@
         </button>
       </div>
     </form>
-  </ng-container>
-  <ng-container>
+
     <app-question
       [question]="realTimeEditQuestion"
       class="card-container"
@@ -82,5 +82,5 @@
       [height]="'270px'"
       [mode]="'edit'"
     ></app-question>
-  </ng-container>
+  </div>
 </div>

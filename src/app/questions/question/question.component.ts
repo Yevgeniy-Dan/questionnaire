@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { IQuestion } from '../shared/questions/interfaces/question.interface';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/state/app.state';
+import { removeQuestion } from 'src/app/state/questions';
 
 @Component({
   selector: 'app-question',
@@ -14,5 +17,9 @@ export class QuestionComponent {
 
   @Input() mode: 'list' | 'edit' | 'create' = 'list';
 
-  removeCard(id: string): void {}
+  constructor(private store: Store<IAppState>) {}
+
+  removeCard(id: string): void {
+    this.store.dispatch(removeQuestion({ id }));
+  }
 }
