@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { IQuestion } from './question.model';
+import { IQuestion } from './interfaces/question.interface';
 
 @Pipe({
   name: 'sortedQuestions',

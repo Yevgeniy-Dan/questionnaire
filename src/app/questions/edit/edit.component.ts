@@ -12,18 +12,14 @@ import {
 
 import { IAppState } from 'src/app/state/app.state';
 import { editQuestion, selectQuestionById } from 'src/app/state/questions';
-import { IQuestion } from '../shared/questions/question.model';
+import { IQuestion } from '../shared/questions/interfaces/question.interface';
 import { UnsubscriberService } from 'src/app/services/unsubscriber.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { answerOptionsValidator } from '../shared/questions/question.validator';
-
-interface EditFormValues {
-  title: string;
-  questionType: 'single' | 'multiple' | 'open';
-  answerOptions: string[];
-}
+import { EditFormValues } from '../shared/questions/interfaces/form.interface';
+import { QuestionType } from '../shared/questions/types/question.type';
 
 /**
  * Component for Editing Questions
@@ -45,7 +41,7 @@ export class EditComponent implements OnInit {
 
   realTimeEditQuestion: IQuestion = {} as IQuestion;
 
-  questionTypes: string[] = ['single', 'multiple', 'open'];
+  questionTypes: QuestionType[] = [] as QuestionType[];
 
   editForm: FormGroup = this.fb.group(
     {

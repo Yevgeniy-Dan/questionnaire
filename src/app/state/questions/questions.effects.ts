@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import { QuestionService } from 'src/app/questions/shared/questions/question.service';
 import { EMPTY, mergeMap } from 'rxjs';
-import { IQuestion } from 'src/app/questions/shared/questions/question.model';
+import { IQuestion } from 'src/app/questions/shared/questions/interfaces/question.interface';
 import { editQuestion } from './questions.actions';
 import { Router } from '@angular/router';
 import { AppQuestionRoute } from 'src/app/app-routing.enum';

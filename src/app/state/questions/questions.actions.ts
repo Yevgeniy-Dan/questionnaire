@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IQuestion } from 'src/app/questions/shared/questions/question.model';
+import { IQuestion } from 'src/app/questions/shared/questions/interfaces/question.interface';
 
 export const editQuestion = createAction(
   '[Edit Question]',

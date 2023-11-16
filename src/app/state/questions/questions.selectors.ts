@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IQuestionState } from './qustions.state';
-import { IQuestion } from 'src/app/questions/shared/questions/question.model';
+import { IQuestion } from 'src/app/questions/shared/questions/interfaces/question.interface';
 
 export const questionFeatureKey = 'questions';
 

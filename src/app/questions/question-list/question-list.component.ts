@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { IQuestion } from '../shared/questions/question.model';
+import { IQuestion } from '../shared/questions/interfaces/question.interface';
 
 @Component({
   selector: 'app-question-list',

@@ -1,4 +1,4 @@
-import { IQuestion } from './question.model';
+import { IQuestion } from './interfaces/question.interface';
 
 export const questionDataInitialState: IQuestion[] = [
   {
