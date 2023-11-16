@@ -13,6 +13,14 @@ const questionsReducer = createReducer(
       ...state,
       questions: updatedQuestions,
     };
+  }),
+  on(questionActions.createQuestion, (state, { question }) => {
+    const updatedQuestions = [...state.questions];
+    updatedQuestions.push(question);
+    return {
+      ...state,
+      questions: updatedQuestions,
+    };
   })
 );
 

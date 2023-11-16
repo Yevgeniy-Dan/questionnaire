@@ -18,7 +18,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { answerOptionsValidator } from '../shared/questions/question.validator';
-import { EditFormValues } from '../shared/questions/interfaces/form.interface';
+import { CreateEditFormValues } from '../shared/questions/interfaces/form.interface';
 import { QuestionType } from '../shared/questions/types/question.type';
 
 /**
@@ -26,10 +26,10 @@ import { QuestionType } from '../shared/questions/types/question.type';
  */
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'],
+  templateUrl: './create-edit.component.html',
+  styleUrls: ['./create-edit.component.scss'],
 })
-export class EditComponent implements OnInit {
+export class CreateEditComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
@@ -94,7 +94,7 @@ export class EditComponent implements OnInit {
   onChanges(): void {
     this.editForm.valueChanges
       .pipe(this.unsubscriber.takeUntilDestroy)
-      .subscribe((formValues: EditFormValues) => {
+      .subscribe((formValues: CreateEditFormValues) => {
         this.realTimeEditQuestion = {
           ...this.realTimeEditQuestion,
           text: formValues.title,

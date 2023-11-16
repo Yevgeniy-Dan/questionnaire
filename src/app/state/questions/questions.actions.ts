@@ -5,3 +5,8 @@ export const editQuestion = createAction(
   '[Edit Question]',
   props<{ editQuestion: IQuestion }>()
 );
+
+export const createQuestion = createAction(
+  '[Create Question]',
+  props<{ question: IQuestion }>()
+);

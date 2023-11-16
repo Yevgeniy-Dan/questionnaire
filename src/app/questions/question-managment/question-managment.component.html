@@ -1,5 +1,10 @@
 <div class="button-container">
-  <button mat-raised-button color="primary" routerLink="./create">
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="./create-edit"
+    [queryParams]="{ mode: 'create' }"
+  >
     + Create
   </button>
 </div>

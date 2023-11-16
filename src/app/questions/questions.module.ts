@@ -5,6 +5,7 @@ import { QuestionsRoutingModule } from './questions-routing.module';
 import { QuestionsComponent } from './questions.component';
 import { QuestionManagmentComponent } from './question-managment/question-managment.component';
 import { QuestionListComponent } from './question-list/question-list.component';
+import { CreateEditComponent } from './create-edit/create-edit.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -19,8 +20,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { QuestionComponent } from './question/question.component';
-import { CreationComponent } from './creation/creation.component';
-import { EditComponent } from './edit/edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
@@ -29,8 +28,7 @@ import { SharedModule } from './shared/shared.module';
     QuestionManagmentComponent,
     QuestionListComponent,
     QuestionComponent,
-    CreationComponent,
-    EditComponent,
+    CreateEditComponent,
   ],
   exports: [QuestionsComponent],
   imports: [

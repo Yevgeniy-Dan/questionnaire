@@ -13,8 +13,8 @@
       <button
         mat-mini-fab
         color="primary"
-        routerLink="./edit"
-        [queryParams]="{ id: question.id }"
+        routerLink="./create-edit"
+        [queryParams]="{ id: question.id, mode: 'edit' }"
       >
         <mat-icon>edit</mat-icon>
       </button>

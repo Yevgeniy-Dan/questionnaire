@@ -1,7 +1,7 @@
-<div *ngIf="editQuestion$ | async as question" class="edit-container">
+<div *ngIf="realTimeEditQuestion" class="edit-container">
   <ng-container>
     <form
-      [formGroup]="editForm"
+      [formGroup]="createEditForm"
       class="form-container"
       (keydown.enter)="$event.preventDefault()"
       (ngSubmit)="saveChanges()"
@@ -13,10 +13,10 @@
         <input
           matInput
           formControlName="title"
-          [value]="question.text"
+          [value]="realTimeEditQuestion.text"
           placeholder="Title"
         />
-        <mat-error *ngIf="editForm.get('title')?.hasError('required')"
+        <mat-error *ngIf="createEditForm.get('title')?.hasError('required')"
           >The title is required</mat-error
         >
       </mat-form-field>
@@ -33,8 +33,8 @@
       <mat-form-field
         formArrayName="answerOptions"
         *ngIf="
-          editForm.get('questionType')?.value === 'single' ||
-          editForm.get('questionType')?.value === 'multiple'
+          createEditForm.get('questionType')?.value === 'single' ||
+          createEditForm.get('questionType')?.value === 'multiple'
         "
         hideRequiredMarker
       >
@@ -67,7 +67,7 @@
           color="primary"
           class="save-btn"
           type="submit"
-          [disabled]="!editForm.valid"
+          [disabled]="!createEditForm.valid"
         >
           Save
         </button>
