@@ -6,11 +6,32 @@ import { IQuestion } from './interfaces/question.interface';
   name: 'sortedQuestions',
 })
 export class SortedQuestionsPipe implements PipeTransform {
-  transform(questions: IQuestion[]): IQuestion[] {
+  transform(
+    questions: IQuestion[],
+    isAnsweredQuestionList: boolean,
+    isManagmentPage: boolean
+  ): IQuestion[] {
     const sortedQuestions = [...questions];
 
-    return sortedQuestions.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    if (isAnsweredQuestionList) {
+      return sortedQuestions
+        .filter((q) => q.answer)
+        .sort(
+          (a, b) =>
+            new Date(b.answer!.date).getTime() -
+            new Date(a.answer!.date).getTime()
+        );
+    } else {
+      if (isManagmentPage) {
+        return sortedQuestions.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+      }
+      return sortedQuestions
+        .filter((q) => !q.answer)
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+    }
   }
 }

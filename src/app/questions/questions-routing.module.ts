@@ -5,8 +5,17 @@ import { AppQuestionRoute } from '../app-routing.enum';
 import { CreateEditComponent } from './create-edit/create-edit.component';
 
 const routes: Routes = [
-  { path: '', component: QuestionsComponent },
-  { path: AppQuestionRoute.CreateEdit, component: CreateEditComponent },
+  { path: '', redirectTo: AppQuestionRoute.ManagmentPage, pathMatch: 'full' },
+  { path: AppQuestionRoute.CreateEditPage, component: CreateEditComponent },
+  {
+    path: AppQuestionRoute.ListsOfQuestionsPage,
+    component: QuestionsComponent,
+  },
+  {
+    path: AppQuestionRoute.ManagmentPage,
+    component: QuestionsComponent,
+  },
+  { path: '**', redirectTo: AppQuestionRoute.ManagmentPage },
 ];
 
 @NgModule({

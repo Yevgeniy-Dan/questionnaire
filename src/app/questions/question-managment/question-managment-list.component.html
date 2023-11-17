@@ -1,0 +1,24 @@
+<div class="button-container">
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="./create-edit"
+    [queryParams]="{ mode: 'create' }"
+  >
+    + Create
+  </button>
+</div>
+<ng-container *ngIf="questions$ | async as questions; else showLoading">
+  <div [class.grid-list-container]="!isManagment">
+    <app-question-cards [questions]="questions"></app-question-cards>
+    <div *ngIf="!isManagment" class="divider"></div>
+    <div *ngIf="!isManagment">
+      <app-question-cards
+        [questions]="questions"
+        [isAnsweredQuestionList]="true"
+      ></app-question-cards>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #showLoading> Loading... </ng-template>

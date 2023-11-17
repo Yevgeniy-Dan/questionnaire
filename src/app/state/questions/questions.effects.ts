@@ -15,7 +15,7 @@ export class QuestionEffects {
       this.actions$.pipe(
         ofType(editQuestion, createQuestion),
         mergeMap(() => {
-          this.router.navigate([AppQuestionRoute.All]);
+          this.router.navigate([AppQuestionRoute.QuestionModulePage]);
           return EMPTY;
         })
       ),

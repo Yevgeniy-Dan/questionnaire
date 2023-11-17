@@ -4,13 +4,13 @@ import { AppQuestionRoute } from './app-routing.enum';
 
 const routes: Routes = [
   {
-    path: AppQuestionRoute.All,
+    path: AppQuestionRoute.QuestionModulePage,
     loadChildren: () =>
       import('./questions/questions.module').then((m) => m.QuestionsModule),
   },
   {
     path: '**',
-    redirectTo: AppQuestionRoute.All,
+    redirectTo: AppQuestionRoute.QuestionModulePage,
   },
 ];
 
