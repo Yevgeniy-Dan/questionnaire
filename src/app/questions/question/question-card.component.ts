@@ -14,7 +14,7 @@ export class QuestionCardComponent {
   @Input() question!: IQuestion;
 
   @Input() width: string = '300px';
-  @Input() height: string = '250px';
+  @Input() height: string = '300px';
 
   @Input() mode: 'list' | 'edit' | 'create' = 'list';
 

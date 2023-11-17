@@ -1,7 +1,8 @@
 export enum AppQuestionRoute {
   QuestionModulePage = 'questions',
   ManagmentPage = 'managment',
-  CreateEditPage = 'managment/create-edit',
+  CreatePage = 'managment/create',
+  EditPage = 'managment/edit',
   ListsOfQuestionsPage = 'list',
   AnswerEditPage = 'list/answer-edit',
 }

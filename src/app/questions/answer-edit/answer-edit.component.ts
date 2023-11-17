@@ -43,7 +43,7 @@ export class AnswerEditComponent implements OnInit {
   ) {}
 
   answerEditForm: FormGroup = this.fb.group({
-    openAnswer: [''],
+    openAnswer: ['', [Validators.minLength(1), Validators.maxLength(255)]],
     singleMultipleAnswer: [null],
   });
 

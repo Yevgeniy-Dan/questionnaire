@@ -7,7 +7,14 @@ import { AnswerEditComponent } from './answer-edit/answer-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: AppQuestionRoute.ManagmentPage, pathMatch: 'full' },
-  { path: AppQuestionRoute.CreateEditPage, component: CreateEditComponent },
+  {
+    path: AppQuestionRoute.CreatePage,
+    component: CreateEditComponent,
+  },
+  {
+    path: AppQuestionRoute.EditPage,
+    component: CreateEditComponent,
+  },
   {
     path: AppQuestionRoute.ListsOfQuestionsPage,
     component: QuestionsComponent,

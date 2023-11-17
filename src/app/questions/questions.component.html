@@ -1,1 +1,37 @@
+<div class="nav-container">
+  <nav class="nav-menu">
+    <ng-container>
+      <ul class="nav-list">
+        <li>
+          <a
+            routerLink="/questions/managment"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link"
+            >Managment</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/questions/list"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link"
+            >List</a
+          >
+        </li>
+      </ul>
+    </ng-container>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="'./create'"
+        [queryParams]="{ mode: 'create' }"
+      >
+        + Create
+      </button>
+    </div>
+  </nav>
+</div>
 <app-question-managment></app-question-managment>

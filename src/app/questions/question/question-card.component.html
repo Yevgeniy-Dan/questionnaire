@@ -6,14 +6,18 @@
     class="card-content-container"
     [style.padding]="!isManagment && 0"
   >
-    <div *ngIf="isManagment; else notManagment" class="card-content">
+    <div
+      *ngIf="isManagment; else notManagment"
+      class="card-content"
+      [class.managment]="isManagment"
+    >
       <p>{{ question.type }}</p>
       <p>{{ question.date | date : "yyyy-MM-dd" }}</p>
     </div>
     <ng-template #notManagment>
       <div
         *ngIf="!question.answer && !isAnswerEdit; else showAnswer"
-        class="card-content"
+        class="card-content list"
       >
         <div class="card-answer-options-container">
           <div *ngIf="question.type !== 'open'">
@@ -41,16 +45,15 @@
     </ng-template>
     <ng-template #showAnswer>
       <div class="card-content">
-        <div class="card-answer-options-container">
-          <div>
-            {{ question.answer?.answer }}
-          </div>
+        <div class="card-answer-container">
+          <div class="card-answer-text">{{ question.answer?.answer }}</div>
         </div>
-        <div class="answer-button-container" *ngIf="!isAnswerEdit">
+        <div class="answer-button-container">
           <button
             mat-raised-button
             color="primary"
             (click)="rollBack(question.id)"
+            *ngIf="!isAnswerEdit"
           >
             Roll Back
           </button>
@@ -63,7 +66,7 @@
       <button
         mat-mini-fab
         color="primary"
-        routerLink="./create-edit"
+        [routerLink]="['./edit']"
         [queryParams]="{ id: question.id, mode: 'edit' }"
       >
         <mat-icon>edit</mat-icon>
