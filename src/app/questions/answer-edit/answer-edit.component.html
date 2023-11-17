@@ -1,0 +1,57 @@
+<div class="main-create-edit-container">
+  <button mat-raised-button (click)="goBack()" class="back-button">Back</button>
+  <div *ngIf="realTimeEditQuestion" class="create-edit-container">
+    <form
+      class="form-container"
+      [formGroup]="answerEditForm"
+      (keydown.enter)="$event.preventDefault()"
+      (ngSubmit)="saveChanges()"
+    >
+      <h1 class="page-title">Answer</h1>
+
+      <mat-form-field
+        hideRequiredMarker
+        class="title-input"
+        *ngIf="realTimeEditQuestion.type === 'open'"
+      >
+        <textarea
+          matInput
+          formControlName="openAnswer"
+          placeholder="Your answer wil be here..."
+          class="open-answer"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="realTimeEditQuestion.type !== 'open'">
+        <mat-select
+          formControlName="singleMultipleAnswer"
+          [multiple]="realTimeEditQuestion.type === 'multiple'"
+        >
+          <mat-option
+            *ngFor="let answerOption of realTimeEditQuestion.answer_options"
+            [value]="answerOption"
+            >{{ answerOption }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="save-button-container">
+        <button
+          mat-raised-button
+          color="primary"
+          class="save-btn"
+          type="submit"
+          [disabled]="!answerEditForm.valid"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+    <app-question-card
+      [question]="realTimeEditQuestion"
+      class="card-container"
+      [width]="'80%'"
+      [height]="'270px'"
+      [mode]="'edit'"
+    ></app-question-card>
+  </div>
+</div>

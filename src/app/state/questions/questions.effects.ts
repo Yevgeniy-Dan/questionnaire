@@ -4,7 +4,11 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { QuestionService } from 'src/app/questions/shared/questions/question.service';
 import { EMPTY, mergeMap } from 'rxjs';
 import { IQuestion } from 'src/app/questions/shared/questions/interfaces/question.interface';
-import { createQuestion, editQuestion } from './questions.actions';
+import {
+  answerQuestion,
+  createQuestion,
+  editQuestion,
+} from './questions.actions';
 import { Router } from '@angular/router';
 import { AppQuestionRoute } from 'src/app/app-routing.enum';
 
@@ -16,6 +20,20 @@ export class QuestionEffects {
         ofType(editQuestion, createQuestion),
         mergeMap(() => {
           this.router.navigate([AppQuestionRoute.QuestionModulePage]);
+          return EMPTY;
+        })
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  answerQuestion$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(answerQuestion),
+        mergeMap(() => {
+          this.router.navigate(['/questions/list']);
           return EMPTY;
         })
       ),

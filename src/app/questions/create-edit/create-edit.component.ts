@@ -35,7 +35,7 @@ import { v4 as uuidv4 } from 'uuid';
  * Component for Editing Questions
  */
 @Component({
-  selector: 'app-edit',
+  selector: 'app-create-edit',
   templateUrl: './create-edit.component.html',
   styleUrls: ['./create-edit.component.scss'],
 })

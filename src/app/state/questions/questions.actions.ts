@@ -1,5 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { IQuestion } from 'src/app/questions/shared/questions/interfaces/question.interface';
+import {
+  IAnswer,
+  IQuestion,
+} from 'src/app/questions/shared/questions/interfaces/question.interface';
 
 export const editQuestion = createAction(
   '[Edit Question]',
@@ -13,5 +16,15 @@ export const createQuestion = createAction(
 
 export const removeQuestion = createAction(
   '[Remove Question]',
+  props<{ id: string }>()
+);
+
+export const answerQuestion = createAction(
+  '[Answer Question]',
+  props<{ id: string; answer: IAnswer }>()
+);
+
+export const answerRollBack = createAction(
+  '[Answer Roll Back]',
   props<{ id: string }>()
 );

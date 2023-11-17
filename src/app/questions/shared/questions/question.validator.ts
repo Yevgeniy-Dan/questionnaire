@@ -15,3 +15,21 @@ export const answerOptionsValidator = (
       }
     : null;
 };
+
+export const answerValidator =
+  (type: 'single' | 'multiple' | 'open') =>
+  (control: AbstractControl): ValidationErrors | null => {
+    if (type === 'open') {
+      const openAnswer = control.get('openAnswer');
+
+      return openAnswer && openAnswer?.value.trim() === ''
+        ? { required: true }
+        : null;
+    } else {
+      const singleMultipleAnswer = control.get('singleMultipleAnswer');
+
+      return singleMultipleAnswer && singleMultipleAnswer.value.length < 2
+        ? { required: true }
+        : null;
+    }
+  };

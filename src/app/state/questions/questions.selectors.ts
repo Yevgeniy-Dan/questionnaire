@@ -13,6 +13,6 @@ export const selectQuestionsData = createSelector(
 );
 
 export const selectQuestionById = (id: string) =>
-  createSelector(selectQuestionsData, (questions: IQuestion[]) =>
-    questions.find((q) => q.id === id)
-  );
+  createSelector(selectQuestionsData, (questions: IQuestion[]) => {
+    return questions.find((q) => q.id === id);
+  });

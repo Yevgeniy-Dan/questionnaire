@@ -33,10 +33,7 @@ export const questionDataInitialState: IQuestion[] = [
       'Nikola Tesla',
     ],
     date: '2023-11-16T00:00:00.000Z',
-    answer: {
-      answer: ['Thomas Edison', 'Marie Curie', 'Nikola Tesla'],
-      date: '2023-11-16T00:00:00.000Z',
-    },
+    answer: undefined,
   },
   {
     id: 'some id 3',

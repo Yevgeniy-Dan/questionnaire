@@ -5,3 +5,8 @@ export interface CreateEditFormValues {
   questionType: QuestionType;
   answerOptions: string[];
 }
+
+export interface AnswerEditFormValues {
+  openAnswer: string;
+  singleMultipleAnswer: string[];
+}

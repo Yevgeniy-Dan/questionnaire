@@ -31,6 +31,36 @@ const questionsReducer = createReducer(
       ...state,
       questions: updatedQuestions,
     };
+  }),
+  on(questionActions.answerQuestion, (state, { id, answer }) => {
+    const updatedQuestions = state.questions.map((question) => {
+      if (question.id === id) {
+        const updatedQuestion = { ...question };
+
+        updatedQuestion.answer = { ...answer };
+
+        return updatedQuestion;
+      }
+
+      return question;
+    });
+
+    return { ...state, questions: updatedQuestions };
+  }),
+  on(questionActions.answerRollBack, (state, { id }) => {
+    const updatedQuestions = state.questions.map((question) => {
+      if (question.id === id) {
+        const updatedQuestion = { ...question };
+
+        updatedQuestion.answer = undefined;
+
+        return updatedQuestion;
+      }
+
+      return question;
+    });
+
+    return { ...state, questions: updatedQuestions };
   })
 );
 
