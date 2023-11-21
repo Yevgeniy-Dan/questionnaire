@@ -1,12 +1,12 @@
 <ng-container *ngIf="questions$ | async as questions; else showLoading">
   <div [class.grid-list-container]="!isManagment">
-    <app-question-cards [questions]="questions"></app-question-cards>
+    <div>
+      <app-question-cards></app-question-cards>
+    </div>
+
     <div *ngIf="!isManagment" class="divider"></div>
     <div *ngIf="!isManagment">
-      <app-question-cards
-        [questions]="questions"
-        [isAnsweredQuestionList]="true"
-      ></app-question-cards>
+      <app-question-cards [isAnsweredQuestionList]="true"></app-question-cards>
     </div>
   </div>
 </ng-container>

@@ -1,6 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as questionActions from './questions.actions';
 import { IQuestionState, initialState } from './qustions.state';
+import { IAnswerOption } from 'src/app/questions/shared/questions/interfaces/question.interface';
+
+import { v4 as uuidv4 } from 'uuid';
 
 const questionsReducer = createReducer(
   initialState,
@@ -52,7 +55,23 @@ const questionsReducer = createReducer(
       if (question.id === id) {
         const updatedQuestion = { ...question };
 
-        updatedQuestion.answer = undefined;
+        let options = question.answer.options;
+
+        if (question.type === 'open') {
+          options = [{ id: (options && options[0].id) || uuidv4(), value: '' }];
+        } else {
+          options = question.answer.options?.map((option) => {
+            return {
+              id: option && option.id,
+              value: option.value,
+              isSelected: false,
+            };
+          });
+        }
+        updatedQuestion.answer = {
+          options: options,
+          isAnswered: false,
+        };
 
         return updatedQuestion;
       }

@@ -15,11 +15,13 @@ export class SortedQuestionsPipe implements PipeTransform {
 
     if (isAnsweredQuestionList) {
       return sortedQuestions
-        .filter((q) => q.answer)
+        .filter((q) => {
+          return q.answer && q.answer.isAnswered;
+        })
         .sort(
           (a, b) =>
-            new Date(b.answer!.date).getTime() -
-            new Date(a.answer!.date).getTime()
+            new Date(b.answer.date!).getTime() -
+            new Date(a.answer.date!).getTime()
         );
     } else {
       if (isManagmentPage) {
@@ -28,7 +30,7 @@ export class SortedQuestionsPipe implements PipeTransform {
         );
       }
       return sortedQuestions
-        .filter((q) => !q.answer)
+        .filter((q) => !q.answer.isAnswered)
         .sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );

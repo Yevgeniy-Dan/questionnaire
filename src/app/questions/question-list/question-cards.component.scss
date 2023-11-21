@@ -1,5 +1,31 @@
-.mat-grid-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// .mat-grid-list {
+//   display: flex;
+//   flex-wrap: wrap;
+//   // justify-content: center;
+//   // align-items: center;
+// }
+
+// .mat-grid-tile {
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .mat-grid-list {
+//   display: flex;
+//   justify-content: space-around;
+// }
+
+// .mat-grid-tile {
+//   width: 100%; /* Ensures each tile takes the full width */
+//   box-sizing: border-box;
+// }
+
+.masonry-container {
+  margin: 0 auto;
+}
+
+.masonry-item {
+  width: 300px;
+  margin-bottom: 20px;
 }

@@ -97,9 +97,9 @@ export class CreateEditComponent implements OnInit {
       });
 
       // Add answer options to the form
-      if (question?.answer_options) {
-        question?.answer_options.forEach((option) => {
-          this.answerOptions.push(this.fb.control(option));
+      if (question?.answer.options) {
+        question?.answer.options.forEach((option) => {
+          this.answerOptions.push(this.fb.control(option.value));
         });
       }
 
@@ -117,15 +117,17 @@ export class CreateEditComponent implements OnInit {
     const newQuestion: IQuestion = {
       id: questionId,
       text: '',
-      type: 'single',
-      answer_options: [],
+      type: 'open',
+      answer: {
+        isAnswered: false,
+      },
       date: new Date().toISOString(),
     };
 
     this.createEditForm.patchValue({
       title: newQuestion.text,
       questionType: newQuestion.type,
-      answerOptions: newQuestion.answer_options,
+      answerOptions: newQuestion.answer.options,
     });
 
     this.realTimeEditQuestion = { ...newQuestion };
@@ -143,7 +145,16 @@ export class CreateEditComponent implements OnInit {
           ...this.realTimeEditQuestion,
           text: formValues.title,
           type: formValues.questionType,
-          answer_options: formValues.answerOptions,
+          answer: {
+            ...this.realTimeEditQuestion.answer,
+            options: formValues.answerOptions.map((option) => {
+              return {
+                id: uuidv4(),
+                value: option,
+                isSelected: false,
+              };
+            }),
+          },
         };
       });
   }

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { QuestionsComponent } from './questions.component';
 import { QuestionManagmentListComponent } from './question-managment/question-managment-list.component';
 import { QuestionCardsComponent } from './question-list/question-cards.component';
 import { CreateEditComponent } from './create-edit/create-edit.component';
-import { AnswerEditComponent } from './answer-edit/answer-edit.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { QuestionCardComponent } from './question/question-card.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,12 +33,12 @@ import { SharedModule } from './shared/shared.module';
     QuestionCardsComponent,
     QuestionCardComponent,
     CreateEditComponent,
-    AnswerEditComponent,
   ],
   exports: [QuestionsComponent],
   imports: [
     CommonModule,
     HttpClientModule,
+    NgxMasonryModule,
     QuestionsRoutingModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -51,6 +52,7 @@ import { SharedModule } from './shared/shared.module';
     MatChipsModule,
     MatDividerModule,
     ScrollingModule,
+    MatCheckboxModule,
     SharedModule,
   ],
 })

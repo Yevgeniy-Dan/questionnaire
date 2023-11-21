@@ -4,12 +4,18 @@ export interface IQuestion {
   id: string;
   text: string;
   type: QuestionType;
-  answer_options?: string[];
+  answer: IAnswer;
   date: string;
-  answer?: IAnswer;
 }
 
 export interface IAnswer {
-  answer: string | string[];
-  date: string;
+  options?: IAnswerOption[];
+  isAnswered: boolean;
+  date?: string;
+}
+
+export interface IAnswerOption {
+  id: string;
+  value: string;
+  isSelected?: boolean;
 }

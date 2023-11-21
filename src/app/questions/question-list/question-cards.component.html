@@ -1,15 +1,19 @@
-<mat-grid-list
-  [cols]="isManagment ? 4 : 2"
-  gutterSize="5px"
-  rowHeight="350px"
-  class="mat-grid-list"
+<ngx-masonry
+  [options]="{
+    gutter: 20,
+    fitWidth: true
+  }"
+  class="masonry-container"
+  *ngIf="questions$ | async as questions"
 >
-  <mat-grid-tile
+  <div
+    ngxMasonryItem
+    class="masonry-item"
     *ngFor="
       let question of questions
         | sortedQuestions : isAnsweredQuestionList : isManagment
     "
   >
     <app-question-card [question]="question"></app-question-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</ngx-masonry>
