@@ -52,7 +52,12 @@
           </ng-template>
         </div>
         <div class="answer-button-container">
-          <button mat-raised-button color="primary" (click)="answer()">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="answer()"
+            [disabled]="!isAnswerValid()"
+          >
             Answer
           </button>
         </div>

@@ -49,9 +49,7 @@ export class QuestionCardComponent {
     if (this.question.type === 'open') {
       const options = [{ id: uuidv4(), value: this.eneteredText }];
 
-      if (this.eneteredText.length !== 0) {
-        this.addAnswer(options);
-      }
+      this.addAnswer(options);
     } else if (this.question.type === 'single') {
       const options = this.question.answer.options?.map((option) => {
         return {
@@ -60,9 +58,7 @@ export class QuestionCardComponent {
         };
       });
 
-      if (this.singleAnswerId) {
-        this.addAnswer(options);
-      }
+      this.addAnswer(options);
     } else {
       const options = this.question.answer.options?.map((option) => {
         return {
@@ -71,9 +67,7 @@ export class QuestionCardComponent {
         };
       });
 
-      if (this.multipleAnswerIds.length >= 2) {
-        this.addAnswer(options);
-      }
+      this.addAnswer(options);
     }
   }
 
@@ -123,5 +117,15 @@ export class QuestionCardComponent {
 
   updateSingleSelectedOption(changedOption: IAnswerOption): void {
     this.singleAnswerId = changedOption.id;
+  }
+
+  isAnswerValid(): boolean {
+    if (this.question.type === 'open') {
+      return this.eneteredText.trim() !== '';
+    } else if (this.question.type === 'single') {
+      return !!this.singleAnswerId;
+    } else {
+      return this.multipleAnswerIds.length >= 1;
+    }
   }
 }
