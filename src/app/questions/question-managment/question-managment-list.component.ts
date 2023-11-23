@@ -13,15 +13,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./question-managment-list.component.scss'],
 })
 export class QuestionManagmentListComponent {
-  questions$: Observable<IQuestion[]>;
+  questions$: Observable<IQuestion[]> = this.store.select(selectQuestionsData);
 
   isManagment: boolean = this.route.snapshot.url[0]?.path === 'managment';
 
-  constructor(private store: Store<IAppState>, private route: ActivatedRoute) {
-    this.questions$ = this.store.select(selectQuestionsData).pipe(
-      map((questions) => {
-        return questions;
-      })
-    );
-  }
+  constructor(private store: Store<IAppState>, private route: ActivatedRoute) {}
 }

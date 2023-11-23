@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card" [class.isEditOrCreateCard]="isEditOrCreatePage">
   <mat-card-header class="card-header">
     <mat-card-title class="card-title">{{ question.text }}</mat-card-title>
   </mat-card-header>
@@ -99,7 +99,7 @@
             mat-raised-button
             color="primary"
             (click)="rollBack(question.id)"
-            *ngIf="!isAnswerEdit"
+            *ngIf="question.answer.isAnswered"
           >
             Roll Back
           </button>
@@ -107,13 +107,13 @@
       </div>
     </ng-template>
   </mat-card-content>
-  <mat-card-footer class="card-footer" *ngIf="isManagment && mode === 'list'">
+  <mat-card-footer class="card-footer" *ngIf="isManagment">
     <mat-card-actions class="card-actions">
       <button
         mat-mini-fab
         color="primary"
         [routerLink]="['./edit']"
-        [queryParams]="{ id: question.id, mode: 'edit' }"
+        [queryParams]="{ id: question.id }"
       >
         <mat-icon>edit</mat-icon>
       </button>

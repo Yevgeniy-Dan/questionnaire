@@ -40,7 +40,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./create-edit.component.scss'],
 })
 export class CreateEditComponent implements OnInit {
-  mode: 'create' | 'edit' = this.route.snapshot.queryParams['mode'];
+  isEditPage: boolean = this.route.snapshot.url[1]?.path === 'edit';
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -79,7 +79,7 @@ export class CreateEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.mode === 'edit') {
+    if (this.isEditPage) {
       // Edit mode
       this.loadEditForm();
     } else {
@@ -200,7 +200,7 @@ export class CreateEditComponent implements OnInit {
   }
 
   saveChanges(): void {
-    if (this.mode === 'edit') {
+    if (this.isEditPage) {
       this.store.dispatch(
         editQuestion({
           editQuestion: {

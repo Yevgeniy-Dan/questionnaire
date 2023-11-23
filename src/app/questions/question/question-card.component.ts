@@ -1,4 +1,9 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   IAnswer,
   IAnswerOption,
@@ -10,16 +15,19 @@ import {
   answerQuestion,
   answerRollBack,
   removeQuestion,
+  selectQuestionById,
 } from 'src/app/state/questions';
 import { ActivatedRoute } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { v4 as uuidv4 } from 'uuid';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-question-card',
   templateUrl: './question-card.component.html',
   styleUrls: ['./question-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionCardComponent {
   singleAnswerId?: string;
@@ -28,12 +36,14 @@ export class QuestionCardComponent {
 
   @Input() question!: IQuestion;
 
-  @Input() mode: 'list' | 'edit' | 'create' = 'list';
-
   isManagment: boolean = this.route.snapshot.url[0]?.path === 'managment';
-  isAnswerEdit: boolean = this.route.snapshot.url[1]?.path === 'answer-edit';
+  @Input() isEditOrCreatePage?: boolean;
 
-  constructor(private store: Store<IAppState>, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store<IAppState>,
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef
+  ) {}
 
   answer(): void {
     if (this.question.type === 'open') {
@@ -88,6 +98,14 @@ export class QuestionCardComponent {
         id: this.question.id,
       })
     );
+    this.store
+      .select(selectQuestionById(this.question.id))
+      .pipe(take(1))
+      .subscribe((question) => {
+        this.question = { ...question! };
+        console.log(question);
+        this.cd.markForCheck();
+      });
   }
 
   updateMultipleSelectedOptions(
