@@ -12,6 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/state/app.state';
 
+/**
+ * Angular component displaying a list of questions with performance optimization.
+ */
 @Component({
   selector: 'app-question-cards',
   templateUrl: './question-cards.component.html',
@@ -34,6 +37,7 @@ export class QuestionCardsComponent implements OnInit {
   ngOnInit(): void {
     this.questions$.subscribe((questions) => {
       this.questions = [...questions];
+      // Manually mark the component for change detection.
       this.cd.markForCheck();
     });
   }

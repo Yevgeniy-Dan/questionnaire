@@ -1,11 +1,13 @@
 <div class="main-create-edit-container">
-  <button mat-raised-button (click)="goBack()" class="back-button">Back</button>
+  <button mat-raised-button (click)="onGoBack()" class="back-button">
+    Back
+  </button>
   <div *ngIf="realTimeEditQuestion" class="create-edit-container">
     <form
       [formGroup]="createEditForm"
       class="form-container"
       (keydown.enter)="$event.preventDefault()"
-      (ngSubmit)="saveChanges()"
+      (ngSubmit)="onSaveChanges()"
     >
       <h1 class="page-title">Edit card</h1>
 

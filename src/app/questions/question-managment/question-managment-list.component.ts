@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 
 import { IAppState } from 'src/app/state/app.state';
 import { IQuestion } from '../shared/questions/interfaces/question.interface';
 import { selectQuestionsData } from 'src/app/state/questions';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-question-managment',

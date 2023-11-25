@@ -11,6 +11,11 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
+import { v4 as uuidv4 } from 'uuid';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
+import { IAppState } from 'src/app/state/app.state';
 import {
   createQuestion,
   editQuestion,
@@ -18,18 +23,11 @@ import {
 } from 'src/app/state/questions';
 import { UnsubscriberService } from 'src/app/services/unsubscriber.service';
 
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-
-import { IAppState } from 'src/app/state/app.state';
-
 import { IQuestion } from '../shared/questions/interfaces/question.interface';
-import { answerOptionsValidator } from '../shared/questions/question.validator';
 import { CreateEditFormValues } from '../shared/questions/interfaces/form.interface';
+import { answerOptionsValidator } from '../shared/questions/question.validator';
 
 import { QuestionType } from '../shared/questions/types/question.type';
-
-import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Component for Editing Questions
@@ -199,8 +197,12 @@ export class CreateEditComponent implements OnInit {
     optionControl.setValue(value);
   }
 
-  saveChanges(): void {
+  /**
+   * Saves changes to a question by dispatching appropriate actions to the NgRx store.
+   */
+  onSaveChanges(): void {
     if (this.isEditPage) {
+      // If in edit mode, dispatches an action to update an existing question.
       this.store.dispatch(
         editQuestion({
           editQuestion: {
@@ -210,6 +212,7 @@ export class CreateEditComponent implements OnInit {
         })
       );
     } else {
+      // If not in edit mode, dispatches an action to create a new question.
       this.store.dispatch(
         createQuestion({
           question: this.realTimeEditQuestion,
@@ -218,7 +221,7 @@ export class CreateEditComponent implements OnInit {
     }
   }
 
-  goBack(): void {
+  onGoBack(): void {
     this.router.navigate(['..']);
   }
 }
