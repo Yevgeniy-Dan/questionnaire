@@ -1,0 +1,130 @@
+<mat-card class="card" [class.isEditOrCreateCard]="isEditOrCreatePage">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">{{ question.text }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content
+    class="card-content-container"
+    [style.padding]="!isManagment && 0"
+  >
+    <div
+      *ngIf="isManagment; else notManagment"
+      class="card-content"
+      [class.managment]="isManagment"
+    >
+      <p>{{ question.type }}</p>
+      <p>{{ question.date | date : "yyyy-MM-dd" }}</p>
+    </div>
+    <ng-template #notManagment>
+      <div
+        *ngIf="!question.answer.isAnswered; else showAnswer"
+        class="card-content list"
+      >
+        <div class="card-answer-options-container">
+          <div *ngIf="question.type === 'single'; else multipleQuestion">
+            <mat-radio-group>
+              <mat-radio-button
+                *ngFor="let option of question.answer?.options"
+                [value]="option"
+                class="mat-radio-button"
+                (change)="updateSingleSelectedOption(option)"
+                >{{ option.value }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+          <ng-template #multipleQuestion>
+            <div *ngIf="question.type !== 'open'; else showOpenAnswer">
+              <div *ngFor="let option of question.answer?.options">
+                <mat-checkbox
+                  (change)="updateMultipleSelectedOptions(option, $event)"
+                >
+                  {{ option.value }}</mat-checkbox
+                >
+              </div>
+            </div>
+          </ng-template>
+          <ng-template #showOpenAnswer>
+            <textarea
+              class="card-textarea"
+              placeholder="Your answer will be here..."
+              maxlength="255"
+              [(ngModel)]="eneteredText"
+            ></textarea>
+          </ng-template>
+        </div>
+        <div class="answer-button-container">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onAnswer()"
+            [disabled]="!isAnswerValid()"
+          >
+            Answer
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #showAnswer>
+      <div class="card-content">
+        <div class="card-answer-container">
+          <div *ngIf="question.type === 'single'; else multipleAnswer">
+            <mat-radio-group>
+              <mat-radio-button
+                *ngFor="let option of question.answer?.options"
+                [value]="option.value"
+                class="mat-radio-button"
+                disabled
+                [checked]="option.isSelected"
+                >{{ option.value }}</mat-radio-button
+              >
+            </mat-radio-group>
+          </div>
+          <ng-template #multipleAnswer>
+            <div *ngIf="question.type !== 'open'; else openAnswer">
+              <div *ngFor="let option of question.answer?.options">
+                <mat-checkbox [checked]="option.isSelected" disabled>
+                  {{ option.value }}</mat-checkbox
+                >
+              </div>
+            </div>
+          </ng-template>
+          <ng-template #openAnswer>
+            <textarea
+              class="card-textarea"
+              placeholder="Your answer will be here..."
+              maxlength="255"
+              [value]="
+                question.answer.options && question.answer.options[0].value
+              "
+              disabled
+            ></textarea>
+          </ng-template>
+        </div>
+        <div class="answer-button-container">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onRollBack(question.id)"
+            *ngIf="question.answer.isAnswered"
+          >
+            Roll Back
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-footer class="card-footer" *ngIf="isManagment">
+    <mat-card-actions class="card-actions">
+      <button
+        mat-mini-fab
+        color="primary"
+        [routerLink]="['./edit']"
+        [queryParams]="{ id: question.id }"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" (click)="onRemoveCard(question.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

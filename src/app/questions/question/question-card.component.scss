@@ -1,0 +1,93 @@
+:host ::ng-deep .mat-mdc-card-header-text {
+  max-width: 100%;
+}
+
+.card.isEditOrCreateCard {
+  min-width: 80%;
+  max-width: 80%;
+  width: 560px;
+}
+
+.card .card-header .card-title {
+  width: 100%;
+  word-wrap: auto;
+  overflow-wrap: break-word;
+}
+
+.answer-button-container {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    margin: 4px 0 0 0;
+  }
+}
+
+.card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: var(--third-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-header {
+  background: linear-gradient(45deg, #3498db, #e74c3c);
+  color: var(--third-color);
+  object-fit: cover;
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+.card-content-container p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card-content-container .card-content {
+  height: 100%;
+  padding: 16px;
+}
+
+.card-content-container .card-content.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-footer {
+  padding: 8px 16px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.card-textarea {
+  width: 100%;
+  outline: 0;
+  height: 100px;
+  background-color: var(--third-color);
+  border: 0;
+  resize: none;
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+
+.mat-radio-button {
+  display: block;
+  width: 100%;
+}

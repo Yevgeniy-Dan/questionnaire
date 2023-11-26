@@ -1,0 +1,18 @@
+<ngx-masonry
+  [options]="{
+    gutter: 20,
+    fitWidth: true
+  }"
+  class="masonry-container"
+>
+  <div
+    ngxMasonryItem
+    class="masonry-item"
+    *ngFor="
+      let question of questions
+        | sortedQuestions : isAnsweredQuestionList : isManagment
+    "
+  >
+    <app-question-card [question]="question"></app-question-card>
+  </div>
+</ngx-masonry>

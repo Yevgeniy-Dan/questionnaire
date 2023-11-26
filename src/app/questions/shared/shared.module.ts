@@ -1,0 +1,12 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { SortedQuestionsPipe } from './questions/sorted-questions.pipe';
+
+@NgModule({
+  declarations: [SortedQuestionsPipe],
+  imports: [CommonModule, FormsModule],
+  exports: [CommonModule, FormsModule, SortedQuestionsPipe],
+})
+export class SharedModule {}
